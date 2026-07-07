@@ -21,14 +21,17 @@ transition:"all 0.2s ease"
 <img
 src={item.image}
 alt={item.name}
-style={{ width: "100%", height: "100px", objectFit: "cover", 
+style={{ width: "100%", height: "400px", objectFit: "cover", flex: 1,
 transform: hover ? "scale(1.1)" : "scale(1)", transition: "0.1s"
 }}
 />
 
-<div style={{ padding: "30px" }}>
+<div style={{ padding: "30px",fontSize:"20px" }}>
 <h3>{item.name}</h3>
-<p style={{ color: "green" }}>₹{item.price}</p>
+<p style={{ color: "green", fontWeight:"bold" }}>₹{item.price} {item.unit && (<span style={{
+    fontSize: "16px"}}>{" "} / {item.unit}</span>
+)}
+</p>
 
 <button
 onClick={() => addToCart(item)}

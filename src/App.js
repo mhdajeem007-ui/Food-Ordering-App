@@ -24,135 +24,190 @@
 
 // export default App;
 
+
+
+
+
 import React, { useState } from "react";
 import FoodItem from "./FoodItems";
+
 import burger from "./burger.jpg";
 import pasta from "./pasta.jpg";
 import pizza from "./pizza.jpg";
 import fries from "./fries.png";
+import shawarma from "./shawarma.jpg";
+import sandwich from "./sandwich.jpg";
+import loadedfries from "./loaded-fries.jpg";
+import nuggets from "./nuggets.jpg";
+import friedchicken from "./fried-chicken.jpg";
 
 function App() {
-  const [cart, setCart] = useState([]);
+const [cart, setCart] = useState([]);
 
-  const foodItems = [
-    { id: 1, name: "Pizza", price: 250, image: pizza },
-    { id: 2, name: "Burger", price: 120, image: burger },
-    { id:3, name: "Pasta", price: 180, image: pasta },
-    {id:4, name: "Fries", price: 90, image: fries },
-  ];
-  const addToCart = (item) => {
-    setCart([...cart, item]);
-  };
-  const removeFromCart = (index) => {
-    const newCart = [...cart];
-    newCart.splice(index, 1);
-    setCart(newCart);
-  };
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-  return (
-    <div style={{ 
-      height: "100vh",
-    flexDirection:"coloumn",
-    boxSizing:"border-box",
-    padding: "20px", 
-    fontFamily: "Arial",
-    // overflow:"hidden"
-    }}>
-      <h1 style={{ textAlign: "center", margin:"5px",fontFamily:"bold"}}> Food Ordering App</h1>
-      
-      <p style={{ textAlign:"center",marginTop:"5px"}}>Delicious Food, Delivered To You!</p>
-      <div style={{ display:"flex",
-         gap:"10px",
-         overflow:"hidden"
-         }}>
-       <div style={{ flex:2 }}>
-        <h2>🍔 Menu</h2>
+const foodItems = [
+{ id: 1, name: "Pizza", price: 250, image: pizza },
+{ id: 2, name: "Burger", price: 120, image: burger },
+{ id: 3, name: "Pasta", price: 180, image: pasta },
+{ id: 4, name: "Fries", price: 90, image: fries },
+{ id: 5, name: "Shawarma", price: 120, image: shawarma },
+{ id: 6, name: "Sandwich", price: 120, image: sandwich },
+{ id: 7, name: "Loaded Fries", price: 180, image: loadedfries },
+{ id: 8, name: "Nuggets", price: 90, image: nuggets },
+{ id: 9, name: "Fried Chicken", price: 999, unit: "10 piece", image: friedchicken },
+];
 
-        <div style={{ flex: 2, 
-          display: "grid", 
-          gridTemplateColumns: "repeat(2, 1fr)", 
-          gap:"20px"}}>
+const addToCart = (item) => {
+setCart([...cart, item]);
+};
 
-        {foodItems.map((item) => (
-          <FoodItem key={item.id} item={item} addToCart={addToCart} />
-        ))}
-      </div>
-      </div>
-      <div style={{flex: 1, 
-        border:"1px solid #ddd", 
-        padding:"10px", 
-        borderRadius:"10px",
-        background:"#f9f9f9",
-        display:"flex",
-        flexDirection:"column",
-        height:"100%"
-        }}>
+const removeFromCart = (index) => {
+const newCart = [...cart];
+newCart.splice(index, 1);
+setCart(newCart);
+};
 
-      <h2>🛒Your Cart</h2>
-      <div 
-      style={{
-        flex:1,
-        overflowY:"auto",
-        marginBottom:"10px"
-      }}>
-       
-        {cart.length === 0 ? ( 
-          <p>No items added</p>
-        ) : (
+const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-      cart.map((item, index) => (
-        <div 
-        key={index} 
-        style={{
-          display:"flex",
-           alignItems:"center",
-           marginBottom:"10px",
-           justifyContent:"space-between"}}>
-         
-        <div style={{ display:"flex", alignItems:"center"}}>
-            <img src={item.image} alt="" style={{ width:"50px", marginRight:"10px"}}/>
-            
-              <span> {item.name} - ₹{item.price} </span>
-            </div>
-            
-          <button onClick={() => removeFromCart (index)}
-            style={{
-              background:"#ee1010",
-              color:"#fff",
-              border:"none",
-              padding:"5px 10px",
-              borderRadius:"5px",
-              cursor:"pointer"
-            }}
-            >Remove</button>
-          </div>
-      ))
-    )}
-    </div>
+return (
+<div
+style={{
+minHeight: "100vh",
+background: "linear-gradient(135deg, #ff7b00, #ffb347)",
+fontFamily: "Arial",
+padding: "20px",
+boxSizing: "border-box",
+}}
+>
+{/* HEADER CONTAINER */}
+<div
+style={{
+position: "sticky",
+top: 0,
+zIndex: 10,
+background: "#fff",
+borderRadius: "16px",
+padding: "18px 25px",
+marginBottom: "20px",
+boxShadow: "0 5px 15px rgba(0,0,0,0.2)",
+}}
+>
+<div
+style={{
+display: "flex",
+alignItems: "center",
+justifyContent: "space-between",
+}}
+>
+<h2 style={{ margin: 0, color: "#ff7b00" }}>🍔 Menu</h2>
 
-    <div>
-      <h3>Total: ₹{total}</h3>
-      <button style={{
-        width:"100%",
-        padding:"10px",
-        background:"green",
-        color:"#fff",
-        border:"none",
-        borderRadius:"5px",
-        cursor:"pointer"
-      }}
-      >
-         Proceed to Checkout</button>
-    </div>
-    </div>
-    </div>
-    </div>
-  );
+<div style={{ textAlign: "center" }}>
+<h1 style={{ margin: 0, fontSize: "36px", color: "#222" }}>
+Food Ordering App
+</h1>
+<p style={{ margin: "6px 0 0", color: "#666" }}>
+Delicious Food, Delivered To You!
+</p>
+</div>
+
+<h2 style={{ margin: 0, color: "#ff7b00" }}>🛒 {cart.length}</h2>
+</div>
+</div>
+
+{/* MAIN CONTAINER */}
+<div
+style={{
+display: "flex",
+gap: "20px",
+alignItems: "flex-start",
+}}
+>
+{/* FOOD ITEMS */}
+<div style={{ flex: 3 }}>
+<div
+style={{
+display: "grid",
+gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+gap: "20px",
+}}
+>
+{foodItems.map((item) => (
+<FoodItem key={item.id} item={item} addToCart={addToCart} />
+))}
+</div>
+</div>
+
+{/* CART */}
+<div
+style={{
+flex: 1,
+background: "#fff",
+padding: "15px",
+borderRadius: "16px",
+position: "sticky",
+top: "120px",
+boxShadow: "0 5px 15px rgba(0,0,0,0.2)",
+}}
+>
+<h2 style={{ marginTop: 0 }}>🛒 Your Cart</h2>
+
+{cart.length === 0 ? (
+<p>No items added</p>
+) : (
+cart.map((item, index) => (
+<div
+key={index}
+style={{
+display: "flex",
+justifyContent: "space-between",
+gap: "10px",
+
+marginBottom: "10px",
+borderBottom: "1px solid #ddd",
+paddingBottom: "8px",
+}}
+>
+<span>
+{item.name} - ₹{item.price}
+{item.unit && ` / ${item.unit}`}
+</span>
+
+<button
+onClick={() => removeFromCart(index)}
+style={{
+background: "#ee1010",
+color: "#fff",
+border: "none",
+padding: "5px 8px",
+borderRadius: "5px",
+cursor: "pointer",
+}}
+>
+Remove
+</button>
+</div>
+))
+)}
+
+<h3>Total: ₹{total}</h3>
+
+<button
+style={{
+width: "100%",
+padding: "12px",
+background: "green",
+color: "#fff",
+border: "none",
+borderRadius: "8px",
+cursor: "pointer",
+fontWeight: "bold",
+}}
+>
+Proceed to Checkout
+</button>
+</div>
+</div>
+</div>
+);
 }
 
 export default App;
-
-
-
-
-
